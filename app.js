@@ -1,16 +1,16 @@
-// Guncel saati yazdirdim
+// This function writes the current day time
 var currentDay = moment().format('dddd, MMMM Do');
 
 $('#currentDay').text(currentDay);
 
-// Calisma saatlerini 9-5 yazdirdim.
+// This function writes the time blocks
 var time = moment(09, 'HH');
 
-while(time.hour() < 23) {
+while(time.hour() < 17) {
     $('body').append(`
     <main>
     <span class="hour">${time.format('hA')}</span>
-    <textarea id="${time.format('hA')}" class="time-block" name="text-area"></textarea>
+    <textarea id="${time.format('H')}" class="time-block" name="text-area"></textarea>
     <button class="saveBtn">
       <img
         src="./assets/save-icon.png"
@@ -22,32 +22,21 @@ while(time.hour() < 23) {
     </main>
     `);
 
-    var textID = $(`#${time}`).text()
-    console.log(textID);
-
     time.add(1, 'hours');
 };
 
+// This condition checks past, future and current time
+var currentTime = Number(moment().format('H'));
+ 
+for(i=9; i<17; i++){
+    if (currentTime == i){
+        $(`#${i}`).addClass('present');
+    } else if(currentTime > i){
+        $(`#${i}`).addClass('past');
+    } else if (currentTime < i){
+        $(`#${i}`).addClass('future');
+    }
+}
 
-
-//Saati kontrol edecegim 
-var currentTime = moment().format('hA');
-console.log(currentTime);
-
-
-
-
-
-
-// $("#6PM").addClass('present');
-
-// $(body).each(function(){
-//      if( currentTime == $() )
-// })
-
-
-
-
-// console.log(mainTime);
 
 
