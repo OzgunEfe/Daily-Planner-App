@@ -2,6 +2,8 @@
 var currentDay = moment().format("dddd, MMMM Do");
 $("#currentDay").text(currentDay);
 
+taskList = [];
+
 // This function writes the time blocks.
 function renderList() {
   var time = moment(09, "HH");
@@ -44,6 +46,7 @@ function renderList() {
     time.add(1, "hours");
   }
 }
+
 renderList();
 displayTasks();
 
@@ -60,7 +63,6 @@ function hideNotification() {
 // It selects the Notification section.
 var saveTaskNotification = $(".notification");
 
-taskList = [];
 // Save button function
 $(".saveBtn").on("click", function (event) {
   var button = $(event.target).closest("button");
@@ -91,4 +93,3 @@ function displayTasks() {
     $(`[data-textArea="textArea-${taskList.id}"]`).text(taskList.text);
   });
 }
-
