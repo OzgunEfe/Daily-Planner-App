@@ -1,97 +1,94 @@
-// This function writes the current day time
+// This function writes the current date and time to the header section.
 var currentDay = moment().format("dddd, MMMM Do");
-
 $("#currentDay").text(currentDay);
 
-// This function writes the time blocks
-var time = moment(09, "HH");
+// This function writes the time blocks.
+function renderList() {
+  var time = moment(09, "HH");
+  var hour = time.hour();
+  var currentTime = Number(moment().format("H"));
 
-while (time.hour() < 23) {
-  $("body").append(`
-    <section>
-    <span class="hour">${time.format("hA")}</span>
-    <textarea id="${time.format(
-      "H"
-    )}" class="time-block" name="text-area"></textarea>
-    <button class="saveBtn">
-      <img
-        src="./assets/save-icon.png"
-        alt="save-icon"
-        height="30px"
-        width="32px"
-      />
-    </button>
-    </section>
+  for (i = hour; i < 23; i++) {
+    var colorClass = "";
+
+    // This conditional checks the hour. According to the hour, it gives the background colour to the text area.
+    if (currentTime == i) {
+      colorClass = "present";
+    } else if (currentTime > i) {
+      colorClass = "past";
+    } else if (currentTime < i) {
+      colorClass = "future";
+    }
+
+    // This section is my time block HTML codes.
+    $("#list").append(`
+        <div class='list--item'>
+            <span class="hour">${time.format("hA")}</span>
+            <textarea 
+            data-textArea="textArea-${time.format("H")}"
+            class="time-block ${colorClass}"
+            name="text-area"></textarea>
+            <button 
+                data-textAreaId="${time.format("H")}"
+                class="saveBtn">
+                <img 
+                  src="./assets/save-icon.png"
+                  alt="save-icon"
+                  height="30px"
+                  width="32px"
+                />
+            </button>
+        </div>
     `);
 
-  time.add(1, "hours");
-}
-
-// This condition checks past, future and current time
-var currentTime = Number(moment().format("H"));
-
-// currentTime = 10;
-
-for (i = 9; i < 23; i++) {
-  if (currentTime == i) {
-    $(`#${i}`).addClass("present");
-  } else if (currentTime > i) {
-    $(`#${i}`).addClass("past");
-  } else if (currentTime < i) {
-    $(`#${i}`).addClass("future");
+    time.add(1, "hours");
   }
 }
-
-taskList = [];
+renderList();
+displayTasks();
 
 // Local Storage Functions
 function saveTasks(arr) {
   localStorage.setItem("Tasks", JSON.stringify(arr));
 }
 
+// It hides the Notification section.
 function hideNotification() {
   saveTaskNotification.addClass("hide");
 }
 
-// Notification text
+// It selects the Notification section.
 var saveTaskNotification = $(".notification");
 
+taskList = [];
 // Save button function
-$(".saveBtn").on("click", function () {
+$(".saveBtn").on("click", function (event) {
+  var button = $(event.target).closest("button");
+  var textAreaId = button.attr("data-textAreaId");
+  var textArea = $(`[data-textArea="textArea-${textAreaId}"]`);
+
+  var textAreaVal = textArea.val();
+  console.log(textAreaVal);
+  console.log(textAreaId);
+
   saveTaskNotification.removeClass("hide");
   setTimeout(hideNotification, 3000);
 
-  // Text Area
-  var textArea = $("textarea");
+  var textAndId = {
+    id: textAreaId,
+    text: textAreaVal,
+  };
 
-  // Get the textarea ID and value
-  textArea.change(function () {
-    var textareaId = textArea.id;
-    var textareaValue = textArea.val();
+  taskList.push(textAndId);
 
-    var textareaObject = {
-      id: textareaId,
-      task: textareaValue
-    };
-
-		taskList.push(textareaObject);
-  });
-
-	saveTasks(taskList);
+  saveTasks(taskList);
 });
 
 function displayTasks() {
   var taskList = JSON.parse(localStorage.getItem("Tasks")) || [];
 
   taskList.forEach(function (taskList) {
-    $(`#${taskList.id}`).text(taskList.task);
+    $(`[data-textArea="textArea-${taskList.id}"]`).text(taskList.text);
   });
 }
 
-// // tiklanan text alaninin id'sini aliyor.
-// $("textarea").click(function () {
-//   var id = $(this).attr("id");
-
-// // textarea value aliyor.
-// $("textarea").change(function () {
-// 	var text = $(this).val();

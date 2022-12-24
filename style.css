@@ -1,21 +1,21 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1;
 }
 
-section{
+.list--item {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 2px;
 }
 
-.fontColor-pink{
+.fontColor-pink {
   color: rgb(216, 34, 6);
 }
 
-#save-task{
+#save-task {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -23,12 +23,12 @@ section{
   margin-bottom: 1rem;
 }
 
-#save-task img{
+#save-task img {
   margin-bottom: 18px;
   margin-left: 5px;
 }
 
-/* Burasi text area zaten belli burasi kalabilir */
+
 textarea {
   background: transparent;
   border: none;
@@ -41,7 +41,7 @@ textarea {
   text-align: center;
 }
 
-/* burasida kalsin en tepesi burasi */
+
 .jumbotron {
   text-align: center;
   background-color: transparent;
@@ -64,7 +64,7 @@ textarea {
   border-top: 1px solid white;
 }
 
-/* Burasi 9 am gibi saatin yazdigi yerin */
+
 .hour {
   background-color: #ffffff;
   color: #000000;
@@ -90,7 +90,7 @@ textarea {
   color: white;
 }
 
-/* Buna bak buton icin burasi ama bakalim fena calismiyor aslinda */
+
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
@@ -101,7 +101,8 @@ textarea {
   width: 80px;
 }
 
-.saveBtn:hover{
+
+.saveBtn:hover {
   background-color: #039cbf;
 }
 
@@ -111,6 +112,6 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
-.hide{
+.hide {
   display: none;
 }
