@@ -11,6 +11,10 @@ body {
   margin-bottom: 2px;
 }
 
+#list{
+  margin-bottom: 20px;
+}
+
 .fontColor-pink {
   color: rgb(216, 34, 6);
 }

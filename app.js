@@ -8,7 +8,7 @@ function renderList() {
   var hour = time.hour();
   var currentTime = Number(moment().format("H"));
 
-  for (i = hour; i < 18; i++) {
+  for (i = hour; i < 19; i++) {
     var colorClass = "";
 
     // This conditional checks the hour. According to the hour, it gives the background colour to the text area.
@@ -68,11 +68,9 @@ $(".saveBtn").on("click", function (event) {
   var button = $(event.target).closest("button");
   var textAreaId = button.attr("data-textAreaId");
   var textArea = $(`[data-textArea="textArea-${textAreaId}"]`);
-
   var textAreaVal = textArea.val();
-  console.log(textAreaVal);
-  console.log(textAreaId);
 
+  // This feature shows and hides the notification
   saveTaskNotification.removeClass("hide");
   setTimeout(hideNotification, 3000);
 
@@ -86,6 +84,7 @@ $(".saveBtn").on("click", function (event) {
   saveTasks(taskList);
 });
 
+// This function gets the information from local Storage and shows them in the correct text area.
 function displayTasks() {
   var taskList = JSON.parse(localStorage.getItem("Tasks")) || [];
 
