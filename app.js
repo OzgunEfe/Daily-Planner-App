@@ -2,15 +2,13 @@
 var currentDay = moment().format("dddd, MMMM Do");
 $("#currentDay").text(currentDay);
 
-taskList = [];
-
 // This function writes the time blocks.
 function renderList() {
   var time = moment(09, "HH");
   var hour = time.hour();
   var currentTime = Number(moment().format("H"));
 
-  for (i = hour; i < 23; i++) {
+  for (i = hour; i < 18; i++) {
     var colorClass = "";
 
     // This conditional checks the hour. According to the hour, it gives the background colour to the text area.
@@ -49,6 +47,8 @@ function renderList() {
 
 renderList();
 displayTasks();
+
+var taskList = JSON.parse(localStorage.getItem("Tasks")) || [];
 
 // Local Storage Functions
 function saveTasks(arr) {
