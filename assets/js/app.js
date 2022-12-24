@@ -32,7 +32,7 @@ function renderList() {
                 data-textAreaId="${time.format("H")}"
                 class="saveBtn">
                 <img 
-                  src="./assets/save-icon.png"
+                  src="./assets/icons/save-icon.png"
                   alt="save-icon"
                   height="30px"
                   width="32px"
